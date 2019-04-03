@@ -7,7 +7,7 @@ print(lst)
 print("\nThere are {} prime numbers in total.".format(len(lst)))
 
 '''
-(*) 可以这样理解
+(*) 鍙互杩欐牱鐞嗚В
 lst1 = []
 for p in range(101, 201):
     lst2 = []
