@@ -1,13 +1,16 @@
 # git_study
 
-## objectives
+## 1. brief introduction
 
-- start git
-- learn Python3
+- To put it simply, this is Python3 Q&A.
 
-## explanations
+## 2. origin of the problems
 
-- These exercises are from the Internet.
-- At lesst one of the answers to each question was written by me.
-- There are also many solutions that are the wisdom of netizens.
+1. https://fishc.com.cn/
+2. https://leetcode.com/
+
+## 3. on the solution
+
+- fishc:    give priority to ideas
+- leetcode: aiming at the optimal solution
 
