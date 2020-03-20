@@ -9,7 +9,7 @@ header = {"User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 
 url = "http://www.pythonchallenge.com/pc/hex/"
 for i in range(1, 26):
     name = f"lake{i}.wav"
-    res = req.get(url+name, headers=header)
+    res = req.get(url+name, auth=("butter", "fly"), headers=header)
     with open(r"lake\{}".format(name), "wb") as f:
         f.write(res.content)
         print(name, "has been downloaded!")

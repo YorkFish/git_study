@@ -11,9 +11,6 @@
     若不能删至唯一，则穷举
 """
 
-from PIL import Image
-from pprint import pprint
-
 
 def get_data(filename):
     """ 获取大小、横/纵向组合方式 """
@@ -33,17 +30,17 @@ def get_data(filename):
 
 def get_candidates(nums, size):
     ''' 给出行/列的组合方式，递归地获得所有的排列，# 为选择标记 '''
-    candidates = []
     n = len(nums)
+    candidates = []
     length = size - sum(nums) - (n-1)
     for i in range(length+1):
-        head = '0'*i + '#'*nums[0]
+        head = ' '*i + '#'*nums[0]
         len_h = len(head)
         if n == 1:
-            tail = '0' * (size-len_h)
+            tail = ' ' * (size-len_h)
             candidates.append(head+tail)
         else:
-            tails = ['0'+j for j in get_candidates(nums[1:], size-len_h-1)]
+            tails = [' '+j for j in get_candidates(nums[1:], size-len_h-1)]
             candidates.extend([head+tail for tail in tails])
     return candidates
 
@@ -62,35 +59,26 @@ def filtrate(candidates, pos, symbol):
     return [line for line in candidates if line[pos] == symbol]
 
 
-def save_png(w, h, data):
-    s = [not c=='0' for line in data for c in line]
-    img = Image.new('1', (h, w))
-    img.putdata(s)
-    img.save("32_result.png")                                
-
-
 def solve(filename):
     size, hor, ver = get_data(filename)
     w, h = size[0]
     candi_h, candi_v = init_all_candidates(w, h, hor, ver)
-
-    res = [[' ']*w for _ in range(h)]
-    cnt = 0
-    target = w * h
+    res = [['0']*w for _ in range(h)]
+    cnt, target = 0, w*h
     while cnt < target:
         # 先针对每一行
-        for row,lines in enumerate(candi_h):
+        for row, lines in enumerate(candi_h):
             if lines == "done":
                 continue
             elif len(lines) == 1:
-                cnt += res[row].count(' ')
+                cnt += res[row].count('0')
                 for col in range(w):
                     res[row][col] = lines[0][col]
                     candi_v[col] = filtrate(candi_v[col], row, lines[0][col])
                 candi_h[row] = "done"
             else:
                 for col in range(w):
-                    if res[row][col] == ' ':
+                    if res[row][col] == '0':
                         for line in lines[1:]:
                             if line[col] != lines[0][col]:
                                 break
@@ -99,19 +87,19 @@ def solve(filename):
                             res[row][col] = lines[0][col]
                             candi_v[col] = filtrate(candi_v[col], row, lines[0][col])
         # 再针对每一列
-        for col,lines in enumerate(candi_v):
+        for col, lines in enumerate(candi_v):
             if lines == "done":
                 continue
             elif len(lines) == 1:
                 for row in range(h):
-                    if res[row][col] == ' ':
+                    if res[row][col] == '0':
                         cnt += 1
                         res[row][col] = lines[0][row]
                         candi_h[row] = filtrate(candi_h[row], col, lines[0][row])
                 candi_v[col] = "done"
             else:
                 for row in range(h):
-                    if res[row][col] == ' ':
+                    if res[row][col] == '0':
                         for line in lines[1:]:
                             if line[row] != lines[0][row]:
                                 break
@@ -119,19 +107,10 @@ def solve(filename):
                             cnt += 1
                             res[row][col] = lines[0][row]
                             candi_h[row] = filtrate(candi_h[row], col, lines[0][row])
-    save_png(w, h, res)
     return res
 
 
 if __name__ == "__main__":
-    solve("up.txt")
-
-    # 1.
-    # res = solve("up.txt")
-    # new = [''.join(line) for line in res]
-    # pprint(new)
-
-    # 2.
-    # res = get_candidates([5, 6, 7], 32)
-    # new = filtrate(res, 10, '#')
-    # pprint(new)
+    res = solve("up.txt")
+    new = [''.join(line)+'\n' for line in res]
+    print(''.join(new))
