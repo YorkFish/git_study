@@ -1,5 +1,5 @@
 # coding:utf-8
-# example 20: bst.py
+# example 21: bst.py
 
 
 class BSTNode(object):

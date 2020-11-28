@@ -1,5 +1,5 @@
 # coding:utf-8
-# example 19: priority_queue.py
+# example 20: priority_queue.py
 
 
 class Array(object):

@@ -22,7 +22,8 @@ __contains__  # 实现 in 操作符
 *15 insert_sort.py
 *16 merge_sort.py
 *17 quick_sort.py
-*18 heap_test.py
-*19 priority_queue.py
-*20 bst.py
-*21 graph.py
+*18 shell_sort.py
+*19 heap_test.py
+*20 priority_queue.py
+*21 bst.py
+*22 graph.py

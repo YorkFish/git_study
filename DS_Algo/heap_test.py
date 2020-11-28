@@ -1,5 +1,5 @@
 # coding:utf-8
-# example 18: heap_test.py
+# example 19: heap_test.py
 
 import random
 

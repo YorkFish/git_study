@@ -1,5 +1,5 @@
 # coding:utf-8
-# example 21: graph.py
+# example 22: graph.py
 
 from collections import deque
 
